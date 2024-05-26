@@ -1,6 +1,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
+# include <locale.h>
 
 // Tipo base dos elementos da árvore
 typedef struct elementos {
@@ -16,6 +17,17 @@ typedef struct no {
 } t_no;
 
 typedef t_no * t_arvore; // Alias de t_no chamado t_arvore (usa "t_arvore" ao invés de "t_no *")
+
+// Cria um novo nó vazio
+t_no * criar() {
+    t_no * no = (t_no*)malloc(sizeof(t_no)); // Alocação Dinâmica
+    if (no) {
+        no -> esq = no -> dir = NULL;   // Inicializa os nós nulos
+    }
+    return no;
+}
+
+
 
 // Função que será usada em compara()
 int compara(t_elemento a, t_elemento b) {
@@ -35,6 +47,27 @@ t_no * busca(t_arvore tree, t_elemento dado) {
     } else {
         return busca(tree -> dir, dado);
     }
+}
+
+int inserir(t_arvore * tree, t_elemento item) {
+    int ok;
+    // se a raiz for nula, entao insere na raiz
+    if (*tree == NULL) {
+        *tree = criar();
+        if (*tree == NULL) {
+            return 0;       // se mesmo assim estiver nula, retorna 0 (erro)
+        }
+        (*tree) -> dado = item;
+        return 1;
+    }
+    if ((compara((*tree) -> dado, item) > 0)) {
+        ok = inserir (&((*tree) -> esq), item);         // se menor que o pai, vai pra esquerda
+    } else if (compara((*tree) -> dado, item)) {
+        ok = inserir (&((*tree) -> dir), item);         // se maior que o pai, vai pra direita
+    } else {
+        ok = 0;
+    }
+    return ok;
 }
 
 // Função para exibir em PréOrdem (UED)
@@ -66,6 +99,8 @@ void exibirPosOrdem (t_arvore tree) {
 
 int main () {
 
-    
+    setlocale(LC_ALL, "Portuguese");
+
+
     return 0;
 }
