@@ -27,8 +27,6 @@ t_no * criar() {
     return no;
 }
 
-
-
 // Função que será usada em compara()
 int compara(t_elemento a, t_elemento b) {
     return (a.rgm - b.rgm);
@@ -60,12 +58,14 @@ int inserir(t_arvore * tree, t_elemento item) {
         (*tree) -> dado = item;
         return 1;
     }
-    if ((compara((*tree) -> dado, item) > 0)) {
+    // Compara o item com o dado do nó atual
+    int comp = compara((*tree)->dado, item);
+    if (comp < 0) {
         ok = inserir (&((*tree) -> esq), item);         // se menor que o pai, vai pra esquerda
-    } else if (compara((*tree) -> dado, item)) {
+    } else if (comp > 0) {
         ok = inserir (&((*tree) -> dir), item);         // se maior que o pai, vai pra direita
     } else {
-        ok = 0;
+        ok = 0;                                         // igual ao dado atual, não insere nada
     }
     return ok;
 }
@@ -83,7 +83,7 @@ void exibirPreOrdem(t_arvore tree) {
 void exibirInOrdem(t_arvore tree) {
     if (tree != NULL) {
         exibirInOrdem(tree -> esq);
-        printf("%s", tree -> dado.nome);
+        printf("%d | %s", tree -> dado.rgm, tree -> dado.nome);
         exibirInOrdem(tree -> dir);
     }
 }
