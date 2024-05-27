@@ -2,6 +2,9 @@
 # include <string.h>
 # include <stdlib.h>
 # include <locale.h>
+# include <string.h>
+# include <conio.h>
+# include <windows.h>
 
 // Tipo base dos elementos da árvore
 typedef struct elementos {
@@ -175,6 +178,24 @@ void exibirPosOrdem (t_arvore tree) {
         printf("%s", tree -> dado.nome);
     }
 }
+
+// Função para exibir a árvore em pré-ordem
+// Sugestão de uso: exibirGraficamente(arvore, 10, 10, 3);
+void exibirGraficamente(t_arvore tree, int col, int lin, int desloc) {
+    /* Col e Lin são coordenadas da tela onde a árvore irá iniciar, ou seja, a posição da raiz. E desloc representa o deslocamento na tela (em colunas) de um nó em relação ao nó anterior */
+    if (tree == NULL) {
+        return;         // Condição de parada
+    }
+    gotoxy(col, lin);
+    printf("%s", tree -> dado.nome);        // ADICIONAR RGM DEPOIS
+    if (tree -> esq != NULL) {
+        exibirGraficamente(tree -> esq, col-desloc, lin+2, desloc/2+1);
+    }
+    if (tree -> dir != NULL) {
+        exibirGraficamente(tree -> dir, col+desloc, lin+2, desloc/2+1);
+    }
+}
+
 
 int main () {
 
