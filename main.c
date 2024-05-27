@@ -70,6 +70,85 @@ int inserir(t_arvore * tree, t_elemento item) {
     return ok;
 }
 
+// Função para buscar e setar o pai
+t_no * buscaSetPai(t_arvore tree, t_elemento dado, t_no ** pai) {
+    if (tree == NULL) {
+        *pai = NULL;        // se árvore vazia, pai nulo
+        return NULL;
+    }
+    
+    // Compara o nó atual com o dado nó
+    if (compara(tree -> dado, dado) == 0) {
+        return tree;        // encontrou, é retornado
+    }
+
+    if (compara(tree -> dado, dado) > 0) {
+        // Vai para a subárvore esquerda
+        *pai = tree;
+        return buscaSetPai(tree -> esq, dado, pai);     // pai na esquerda
+    } else {
+        // Vai para a subárvore direita
+        *pai = tree;
+        return buscaSetPai(tree -> dir, dado, pai);     // pai na direita
+    }    
+}
+
+// Função para remover nó por RGM
+int remover (t_arvore *tree, t_elemento item) {
+    t_no *no, // no aponta para o no a ser removido
+        *pai, // pai aponta para o pai do no
+        *sub, // sub aponta que ira substituir o no no
+        *paiSuce, // pai do no sucessor
+        *suce; // sucessor do no no
+
+    no = *tree; pai=NULL;
+    no = buscaSetPai(*tree, item, &pai);        // Busca o nó a ser removido, e seta o seu pai
+
+    if (no==NULL) {
+        return 0; // Não existe na arvore -> não consegue remover   
+    }
+
+    // CASO QUE O NÓ TEM UM FILHO NO MÁXIMO
+    if (no->esq == NULL)
+        sub = no->dir;          // Se não tá na esquerda -> tá na direita
+    else {
+        if (no->dir == NULL) {
+            sub = no->esq;      // Se não tá na direita -> tá na esquerda
+        } else {                // CASO QUE O NÓ TEM DOIS FILHOS
+            paiSuce = no;
+            sub = no -> dir;
+            suce = sub -> esq;       // suce é sempre o filho esquerdo de sub
+                while (suce != NULL) {      // Checa até achar um valor
+                    paiSuce = sub;
+                    sub = suce;
+                    suce = sub->esq;
+                }
+               // neste ponto, sub eh o sucessor em ordem de no
+               if (paiSuce != no) {
+                   //  no não é o pai de sub, e sub == paiSuce->esq
+                   paiSuce->esq = sub->dir;     // remove o no sub de sua atual posicao e o substitui pelo filho direito de sub
+                   sub->dir = no->dir;          // sub ocupa o lugar de no
+               }
+               sub->esq = no->esq;              // define o filho esquerdo de sub de modo que sub ocupe o lugar de no
+        }
+           
+    }
+    // insere sub na posicao ocupada anteriormente por no
+    if (pai == NULL) {      // Se nó é raiz, não tem pai
+        *tree = sub;
+    }
+    else {
+        // Verifica se o nó é filho da esquerda ou direita
+        if (no == pai->esq) {
+            pai->esq = sub;
+        } else {
+            pai->dir = sub;
+        }
+    }
+    free(no); // Libera a memória alocada no nó
+    return 1; // verdadeiro, conseguiu remover
+}
+
 // Função para exibir em PréOrdem (UED)
 void exibirPreOrdem(t_arvore tree) {
     if (tree != NULL) {
