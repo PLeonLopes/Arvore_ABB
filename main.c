@@ -187,7 +187,8 @@ void exibirGraficamente(t_arvore tree, int col, int lin, int desloc) {
         return;         // Condição de parada
     }
     gotoxy(col, lin);
-    printf("%s", tree -> dado.nome);        // ADICIONAR RGM DEPOIS
+    printf("%d | %s", tree -> dado.rgm, tree-> dado.nome);
+
     if (tree -> esq != NULL) {
         exibirGraficamente(tree -> esq, col-desloc, lin+2, desloc/2+1);
     }
@@ -196,6 +197,15 @@ void exibirGraficamente(t_arvore tree, int col, int lin, int desloc) {
     }
 }
 
+void menu() {
+    printf("\nMENU EDITOR DE ÁRVORE\n");
+    printf("1 - Inserir nome e RGM\n");
+	printf("2 - Remover um nó\n");
+	printf("3 - Pesquisar por RGM\n");
+	printf("4 - Esvaziar a árvore\n");
+    printf("5 - Exibir árvore\n");
+	printf("0 - Fechar programa\n");
+}
 
 int main () {
 
