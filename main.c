@@ -179,6 +179,16 @@ void exibirPosOrdem (t_arvore tree) {
     }
 }
 
+/* Função para fazer o gotoxy() e função exibirGraficamente() funcionar (Compilador não entende a biblioteca por padrão (?) )
+(https://www.quora.com/The-function-gotoxy-is-not-performing-in-my-C-program-when-typed-into-Code-Blocks-What-should-I-do) */
+void gotoxy(int coluna, int linha)
+{ 
+   COORD point;
+   point.X = coluna;
+   point.Y = linha;
+   SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), point);
+}
+
 // Função para exibir a árvore em pré-ordem
 // Sugestão de uso: exibirGraficamente(arvore, 10, 10, 3);
 void exibirGraficamente(t_arvore tree, int col, int lin, int desloc) {
