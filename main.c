@@ -233,46 +233,49 @@ int main () {
     t_arvore arvore = NULL;
     t_elemento elemento;
     int opcao;
-    int rgm;
-    char nome[100];
 
-    menu();
-    printf("Escolha uma opção: ");
-    scanf("%d", &opcao);
+    while (1) {
+        menu();
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
 
-    switch (opcao) {
-        case 1:     // Opção de inserir
-            printf("Inserir nome: ");
-            scanf("%s", elemento.nome); // Lendo para elemento.nome
+        switch (opcao) {
+            case 1:     // Opção de inserir
+                printf("Inserir nome: ");
+                scanf("%s", elemento.nome); // Lendo para elemento.nome
 
-            printf("Inserir RGM: ");
-            scanf("%d", &elemento.rgm); // Ler diretamente para elemento.rgm
+                printf("Inserir RGM: ");
+                scanf("%d", &elemento.rgm); // Ler diretamente para elemento.rgm
 
-            // Checagem
-            if (inserir(&arvore, elemento)) {
-                printf("Elemento inserido com sucesso!\n");
-            } else {
-                printf("Erro ao inserir novo elemento.\n");
-            }
-            break;
-        case 2:     // Opção de remover
-            printf("Digite um RGM para remover o nó: ");
-            scanf("%d", &elemento);
-            
-            // Checagem
-            if (remover(&arvore, elemento)) {
-                printf("Elemento removido com sucesso!\n");
-            } else {
-                printf("Erro ao remover elemento.\n");
-            }
-            break;
-        default:
-            break;
+                // Checagem
+                if (inserir(&arvore, elemento)) {
+                    printf("Elemento inserido com sucesso!\n");
+                } else {
+                    printf("Erro ao inserir novo elemento.\n");
+                }
+                break;
+            case 2:     // Opção de remover
+                printf("Digite um RGM para remover o nó: ");
+                scanf("%d", &elemento.rgm);
+                
+                // Checagem
+                if (remover(&arvore, elemento)) {
+                    printf("Elemento removido com sucesso!\n");
+                } else {
+                    printf("Erro ao remover elemento.\n");
+                }
+                break;
+
+
+            case 0:     // Saída do programa
+                esvaziar(&arvore);
+                printf("Programa encerrado.");
+                return 0;
+                
+            default:
+                break;
+        }   
     }
-
-
-
-
 
 
 }
