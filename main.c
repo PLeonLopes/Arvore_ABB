@@ -63,9 +63,9 @@ int inserir(t_arvore * tree, t_elemento item) {
     }
     // Compara o item com o dado do nó atual
     int comp = compara((*tree)->dado, item);
-    if (comp < 0) {
+    if (comp > 0) {
         ok = inserir (&((*tree) -> esq), item);         // se menor que o pai, vai pra esquerda
-    } else if (comp > 0) {
+    } else if (comp < 0) {
         ok = inserir (&((*tree) -> dir), item);         // se maior que o pai, vai pra direita
     } else {
         ok = 0;                                         // igual ao dado atual, não insere nada
