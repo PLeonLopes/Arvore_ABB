@@ -165,7 +165,7 @@ void esvaziar(t_arvore *tree) {
 // Função para exibir em PréOrdem (UED)
 void exibirPreOrdem(t_arvore tree) {
     if (tree != NULL) {
-        printf("%s", tree->dado.nome);
+        printf("%d | %s\n", tree->dado.rgm, tree->dado.nome);
         exibirPreOrdem(tree -> esq);
         exibirPreOrdem(tree -> dir);
     }
@@ -175,7 +175,7 @@ void exibirPreOrdem(t_arvore tree) {
 void exibirInOrdem(t_arvore tree) {
     if (tree != NULL) {
         exibirInOrdem(tree -> esq);
-        printf("%d | %s", tree -> dado.rgm, tree -> dado.nome);
+        printf("%d | %s\n", tree->dado.rgm, tree->dado.nome);
         exibirInOrdem(tree -> dir);
     }
 }
@@ -185,7 +185,7 @@ void exibirPosOrdem (t_arvore tree) {
     if (tree != NULL) {
         exibirPosOrdem(tree -> esq);
         exibirPosOrdem(tree -> dir);
-        printf("%s", tree -> dado.nome);
+        printf("%d | %s\n", tree->dado.rgm, tree->dado.nome);
     }
 }
 
@@ -233,6 +233,7 @@ int main () {
     t_arvore arvore = NULL;
     t_elemento elemento;
     int opcao;
+    int opExib;
 
     while (1) {
         menu();
@@ -280,6 +281,30 @@ int main () {
                 esvaziar(&arvore);
                 printf("Árvore apagada com sucesso.");
                 break;
+            case 5:
+                printf("Exibir árvore:\n1 - PRÉ-ORDEM\n2 - IN-ORDEM\n3 - PÓS-ORDEM\n4 - Graficamente\n");
+                scanf("%d", &opExib);
+
+                switch (opExib) {
+                    case 1:
+                        printf("Exibição PRÉ-ORDEM:\n");
+                        exibirPreOrdem(arvore);
+                        break;
+                    case 2:
+                        printf("Exibição IN-ORDEM:\n");
+                        exibirInOrdem(arvore);
+                        break;
+                    case 3:
+                        printf("Exibição PÓS-ORDEM:\n");
+                        exibirPosOrdem(arvore);
+                        break;
+                    case 4:
+                        printf("Exibição Gráfica>\n");
+                        exibirGraficamente(arvore, 60, 1, 25);
+                        break;
+                }
+                break;
+
             case 0:     // Saída do programa
                 esvaziar(&arvore);
                 printf("Programa encerrado.");
