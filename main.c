@@ -241,10 +241,10 @@ int main () {
 
         switch (opcao) {
             case 1:     // Opção de inserir
-                printf("Inserir nome: ");
+                printf("Digite um nome: ");
                 scanf("%s", elemento.nome); // Lendo para elemento.nome
 
-                printf("Inserir RGM: ");
+                printf("Digite um RGM: ");
                 scanf("%d", &elemento.rgm); // Ler diretamente para elemento.rgm
 
                 // Checagem
@@ -265,13 +265,22 @@ int main () {
                     printf("Erro ao remover elemento.\n");
                 }
                 break;
-
-
+            case 3:     // Opção de BUSCAR
+                printf("Insira RGM para buscar: ");
+                scanf("%d", &elemento.rgm);
+                t_no *resultado = busca(arvore, elemento);
+                // Checagem
+                if (resultado != NULL) {
+                    printf("Elemento encontrado: %d | %s\n", resultado->dado.rgm, resultado->dado.nome);
+                } else {
+                    printf("Elemento não encontrado.\n");
+                }
+                break;
             case 0:     // Saída do programa
                 esvaziar(&arvore);
                 printf("Programa encerrado.");
                 return 0;
-                
+
             default:
                 break;
         }   
