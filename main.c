@@ -276,6 +276,10 @@ int main () {
                     printf("Elemento não encontrado.\n");
                 }
                 break;
+            case 4:     // Função para Esvaziar árvore
+                esvaziar(&arvore);
+                printf("Árvore apagada com sucesso.");
+                break;
             case 0:     // Saída do programa
                 esvaziar(&arvore);
                 printf("Programa encerrado.");
