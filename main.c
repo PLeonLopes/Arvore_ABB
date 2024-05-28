@@ -230,7 +230,38 @@ void menu() {
 int main () {
 
     setlocale(LC_ALL, "Portuguese");
+    t_arvore arvore = NULL;
+    t_elemento elemento;
+    int opcao;
+    int rgm;
+    char nome[100];
+
+    menu();
+    printf("Escolha uma opção: ");
+    scanf("%d", &opcao);
+
+    switch (opcao) {
+        case 1:
+            printf("Inserir nome: ");
+            scanf("%s", elemento.nome); // Lendo para elemento.nome
+
+            printf("Inserir RGM: ");
+            scanf("%d", &elemento.rgm); // Ler diretamente para elemento.rgm
+
+            if (inserir(&arvore, elemento)) {
+                printf("Elemento inserido com sucesso!\n");
+            } else {
+                printf("Erro ao inserir elemento.\n");
+            }
+            break;
+    
+        default:
+            break;
+    }
 
 
-    return 0;
+
+
+
+
 }
