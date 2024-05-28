@@ -241,20 +241,31 @@ int main () {
     scanf("%d", &opcao);
 
     switch (opcao) {
-        case 1:
+        case 1:     // Opção de inserir
             printf("Inserir nome: ");
             scanf("%s", elemento.nome); // Lendo para elemento.nome
 
             printf("Inserir RGM: ");
             scanf("%d", &elemento.rgm); // Ler diretamente para elemento.rgm
 
+            // Checagem
             if (inserir(&arvore, elemento)) {
                 printf("Elemento inserido com sucesso!\n");
             } else {
-                printf("Erro ao inserir elemento.\n");
+                printf("Erro ao inserir novo elemento.\n");
             }
             break;
-    
+        case 2:     // Opção de remover
+            printf("Digite um RGM para remover o nó: ");
+            scanf("%d", &elemento);
+            
+            // Checagem
+            if (remover(&arvore, elemento)) {
+                printf("Elemento removido com sucesso!\n");
+            } else {
+                printf("Erro ao remover elemento.\n");
+            }
+            break;
         default:
             break;
     }
