@@ -242,20 +242,24 @@ int main () {
 
         switch (opcao) {
             case 1:     // Opção de inserir
+                system("cls");	
                 printf("Digite um nome: ");
                 scanf("%s", elemento.nome); // Lendo para elemento.nome
 
                 printf("Digite um RGM: ");
                 scanf("%d", &elemento.rgm); // Ler diretamente para elemento.rgm
-
+                
                 // Checagem
                 if (inserir(&arvore, elemento)) {
                     printf("Elemento inserido com sucesso!\n");
                 } else {
                     printf("Erro ao inserir novo elemento.\n");
                 }
+                system("pause");
+				system("cls");
                 break;
             case 2:     // Opção de remover
+                system("cls");
                 printf("Digite um RGM para remover o nó: ");
                 scanf("%d", &elemento.rgm);
                 
@@ -265,8 +269,11 @@ int main () {
                 } else {
                     printf("Erro ao remover elemento.\n");
                 }
+                system("pause");
+				system("cls");
                 break;
             case 3:     // Opção de BUSCAR
+                system("cls");
                 printf("Insira RGM para buscar: ");
                 scanf("%d", &elemento.rgm);
                 t_no *resultado = busca(arvore, elemento);
@@ -276,44 +283,64 @@ int main () {
                 } else {
                     printf("Elemento não encontrado.\n");
                 }
+                system("pause");
+				system("cls");
                 break;
             case 4:     // Função para Esvaziar árvore
+                system("cls");
                 esvaziar(&arvore);
                 printf("Árvore apagada com sucesso.");
+                printf("\n\n\n\n");
+				system("pause");
+				system("cls");
                 break;
             case 5:
+                system("cls");
                 printf("Exibir árvore:\n1 - PRÉ-ORDEM\n2 - IN-ORDEM\n3 - PÓS-ORDEM\n4 - Graficamente\n");
                 scanf("%d", &opExib);
 
                 switch (opExib) {
                     case 1:
+                        system("cls");
                         printf("Exibição PRÉ-ORDEM:\n");
                         exibirPreOrdem(arvore);
+                        printf("\n\n\n\n");
+						system("pause");
+						system("cls");
                         break;
                     case 2:
+                        system("cls");
                         printf("Exibição IN-ORDEM:\n");
                         exibirInOrdem(arvore);
+                        printf("\n\n\n\n");
+						system("pause");
+						system("cls");	
                         break;
                     case 3:
+                        system("cls");
                         printf("Exibição PÓS-ORDEM:\n");
                         exibirPosOrdem(arvore);
+                        printf("\n\n\n\n");
+						system("pause");
+						system("cls");	
                         break;
                     case 4:
-                        printf("Exibição Gráfica>\n");
+                        system("cls");
+                        printf("Exibição Gráfica:\n\n\n");
                         exibirGraficamente(arvore, 60, 1, 25);
+                        printf("\n\n\n\n");
+						system("pause");
+						system("cls");
                         break;
                 }
                 break;
-
             case 0:     // Saída do programa
                 esvaziar(&arvore);
                 printf("Programa encerrado.");
                 return 0;
-
             default:
+                printf("Opção Inválida! Digite uma opção válida e tente novamente.");
                 break;
         }   
     }
-
-
 }
