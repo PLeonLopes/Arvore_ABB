@@ -152,6 +152,16 @@ int remover (t_arvore *tree, t_elemento item) {
     return 1; // verdadeiro, conseguiu remover
 }
 
+void esvaziar(t_arvore *tree) {
+    if (*tree == NULL) {
+        return;     // Condição de parada (caso nula)
+    }
+    esvaziar(&(*tree)->esq);    // Esvazia esquerda
+    esvaziar(&(*tree)->dir);    // Esvazia direita
+    free(*tree);                // Libera memória da árvora
+    *tree = NULL;               // Seta como nula novamente
+}
+
 // Função para exibir em PréOrdem (UED)
 void exibirPreOrdem(t_arvore tree) {
     if (tree != NULL) {
