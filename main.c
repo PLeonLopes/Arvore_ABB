@@ -6,6 +6,12 @@
 # include <conio.h>
 # include <windows.h>
 
+// Cores do terminal
+#define RED "\e[0;31m"
+#define GREEN "\e[0;32m"
+#define BLUE "\e[0;34m"
+#define CRESET "\e[0m"
+
 // Tipo base dos elementos da árvore
 typedef struct elementos {
     int rgm;
@@ -251,9 +257,9 @@ int main () {
                 
                 // Checagem
                 if (inserir(&arvore, elemento)) {
-                    printf("Elemento inserido com sucesso!\n");
+                    printf(GREEN"Elemento inserido com sucesso!\n"CRESET);
                 } else {
-                    printf("Erro ao inserir novo elemento.\n");
+                    printf(RED"Erro ao inserir novo elemento.\n"CRESET);
                 }
                 system("pause");
 				system("cls");
@@ -265,9 +271,9 @@ int main () {
                 
                 // Checagem
                 if (remover(&arvore, elemento)) {
-                    printf("Elemento removido com sucesso!\n");
+                    printf(GREEN"Elemento removido com sucesso!\n"CRESET);
                 } else {
-                    printf("Erro ao remover elemento.\n");
+                    printf(RED"Erro ao remover elemento.\n"CRESET);
                 }
                 system("pause");
 				system("cls");
@@ -279,9 +285,9 @@ int main () {
                 t_no *resultado = busca(arvore, elemento);
                 // Checagem
                 if (resultado != NULL) {
-                    printf("Elemento encontrado: %d | %s\n", resultado->dado.rgm, resultado->dado.nome);
+                    printf(GREEN"Elemento encontrado: %d | %s\n"CRESET, resultado->dado.rgm, resultado->dado.nome);
                 } else {
-                    printf("Elemento não encontrado.\n");
+                    printf(RED"Elemento não encontrado.\n"CRESET);
                 }
                 system("pause");
 				system("cls");
@@ -289,20 +295,20 @@ int main () {
             case 4:     // Função para Esvaziar árvore
                 system("cls");
                 esvaziar(&arvore);
-                printf("Árvore apagada com sucesso.");
+                printf(GREEN"Árvore apagada com sucesso."CRESET);
                 printf("\n\n\n\n");
 				system("pause");
 				system("cls");
                 break;
             case 5:
                 system("cls");
-                printf("Exibir árvore:\n1 - PRÉ-ORDEM\n2 - IN-ORDEM\n3 - PÓS-ORDEM\n4 - Graficamente\n");
+                printf(BLUE"Exibir árvore:\n1 - PRÉ-ORDEM\n2 - IN-ORDEM\n3 - PÓS-ORDEM\n4 - Graficamente\n"CRESET);
                 scanf("%d", &opExib);
 
                 switch (opExib) {
                     case 1:
                         system("cls");
-                        printf("Exibição PRÉ-ORDEM:\n");
+                        printf(BLUE"Exibição PRÉ-ORDEM:\n"CRESET);
                         exibirPreOrdem(arvore);
                         printf("\n\n\n\n");
 						system("pause");
@@ -310,7 +316,7 @@ int main () {
                         break;
                     case 2:
                         system("cls");
-                        printf("Exibição IN-ORDEM:\n");
+                        printf(BLUE"Exibição IN-ORDEM:\n"CRESET);
                         exibirInOrdem(arvore);
                         printf("\n\n\n\n");
 						system("pause");
@@ -318,7 +324,7 @@ int main () {
                         break;
                     case 3:
                         system("cls");
-                        printf("Exibição PÓS-ORDEM:\n");
+                        printf(BLUE"Exibição PÓS-ORDEM:\n"CRESET);
                         exibirPosOrdem(arvore);
                         printf("\n\n\n\n");
 						system("pause");
@@ -326,7 +332,7 @@ int main () {
                         break;
                     case 4:
                         system("cls");
-                        printf("Exibição Gráfica:\n\n\n");
+                        printf(BLUE"Exibição Gráfica:\n\n\n"CRESET);
                         exibirGraficamente(arvore, 60, 1, 25);
                         printf("\n\n\n\n");
 						system("pause");
@@ -339,7 +345,7 @@ int main () {
                 printf("Programa encerrado.");
                 return 0;
             default:
-                printf("Opção Inválida! Digite uma opção válida e tente novamente.");
+                printf(RED"Opção Inválida! Digite uma opção válida e tente novamente."CRESET);
                 break;
         }   
     }
