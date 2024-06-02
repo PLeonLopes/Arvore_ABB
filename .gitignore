@@ -1,3 +1,6 @@
 
 output/main.exe
 /output
+/.vscode
+.vscode/settings.json
+/.vscode

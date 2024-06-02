@@ -1,7 +1,6 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
-# include <locale.h>
 # include <string.h>
 # include <conio.h>
 # include <windows.h>
@@ -235,7 +234,9 @@ void menu() {
 
 int main () {
 
-    setlocale(LC_ALL, "Portuguese");
+    UINT CPAGE_UTF8 = 65001;            // Código de Internacionalização de caracteres
+    SetConsoleOutputCP(CPAGE_UTF8);
+
     t_arvore arvore = NULL;
     t_elemento elemento;
     int opcao;
