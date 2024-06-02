@@ -249,13 +249,15 @@ int main () {
 
         switch (opcao) {
             case 1:     // Opção de inserir
-                system("cls");	
+                system("cls");
                 printf("Digite um nome: ");
-                scanf("%s", elemento.nome); // Lendo para elemento.nome
-
-                printf("Digite um RGM: ");
-                scanf("%d", &elemento.rgm); // Ler diretamente para elemento.rgm
+                fflush(stdin);                                              // Limpar o buffer do teclado antes de usar fgets
+                fgets(elemento.nome, sizeof(elemento.nome), stdin);         // Lendo para elemento.nome (basicamente mesma coisa do scanf)
+                elemento.nome[strcspn(elemento.nome, "\n")] = '\0';         // Remove o caractere de nova linha que fgets adiciona
                 
+                printf("Digite um RGM: ");
+                scanf("%d", &elemento.rgm);         // Ler diretamente para elemento.rgm
+
                 // Checagem
                 if (inserir(&arvore, elemento)) {
                     printf(GREEN"Elemento inserido com sucesso!\n"CRESET);
@@ -263,7 +265,7 @@ int main () {
                     printf(RED"Erro ao inserir novo elemento.\n"CRESET);
                 }
                 system("pause");
-				system("cls");
+                system("cls");
                 break;
             case 2:     // Opção de remover
                 system("cls");
@@ -301,13 +303,14 @@ int main () {
 				system("pause");
 				system("cls");
                 break;
-            case 5:
+            case 5:     // Função para exibir a árvore
                 system("cls");
                 printf(BLUE"Exibir árvore:\n1 - PRÉ-ORDEM\n2 - IN-ORDEM\n3 - PÓS-ORDEM\n4 - Graficamente\n"CRESET);
+                printf("Escolha uma opção: ");
                 scanf("%d", &opExib);
 
                 switch (opExib) {
-                    case 1:
+                    case 1:     // Exibição Pré-Ordem
                         system("cls");
                         printf(BLUE"Exibição PRÉ-ORDEM:\n"CRESET);
                         exibirPreOrdem(arvore);
@@ -315,7 +318,7 @@ int main () {
 						system("pause");
 						system("cls");
                         break;
-                    case 2:
+                    case 2:     // Exibição In-Ordem
                         system("cls");
                         printf(BLUE"Exibição IN-ORDEM:\n"CRESET);
                         exibirInOrdem(arvore);
@@ -323,7 +326,7 @@ int main () {
 						system("pause");
 						system("cls");	
                         break;
-                    case 3:
+                    case 3:     // Exibição Pós-Ordem
                         system("cls");
                         printf(BLUE"Exibição PÓS-ORDEM:\n"CRESET);
                         exibirPosOrdem(arvore);
@@ -331,13 +334,16 @@ int main () {
 						system("pause");
 						system("cls");	
                         break;
-                    case 4:
+                    case 4:     // // Exibição Gráfica
                         system("cls");
                         printf(BLUE"Exibição Gráfica:\n\n\n"CRESET);
                         exibirGraficamente(arvore, 60, 1, 25);
                         printf("\n\n\n\n");
 						system("pause");
 						system("cls");
+                        break;
+                    default:
+                        printf(RED"Opção Inválida! Digite uma opção válida e tente novamente."CRESET);
                         break;
                 }
                 break;
