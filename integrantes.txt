@@ -1,7 +1,0 @@
-EQUIPE:
-PEDRO LEON LOPES        -> [https://www.linkedin.com/in/pedro-leon-lopes/] | [https://github.com/PLeonLopes]
-RICARDO SILVA FLORES    -> [https://www.linkedin.com/in/ricardo-silva-flores-2b06a1214/] | [https://github.com/Rick-SF]
-WELLINGTON JÚNIOR       -> [https://www.linkedin.com/in/juniorwellington1307/]
-
-PROFESSOR ORIENTADOR:
-LEANDRO MELO [https://www.linkedin.com/in/lmleandro9/]

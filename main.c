@@ -222,6 +222,39 @@ void exibirGraficamente(t_arvore tree, int col, int lin, int desloc) {
     }
 }
 
+// Função para ler arquivo dos Créditos
+void lerArquivo(const char *nomeArquivo) {
+    FILE *fptr;
+    long tamanhoArquivo;
+    char *conteudo;
+
+    fptr = fopen(nomeArquivo, "r");    // Abrir um arquivo em modo de leitura
+    if (fptr == NULL) {
+        printf("Erro ao abrir o arquivo.");     // Checa por erros
+        return;
+    }
+
+    fseek(fptr, 0, SEEK_END);                   // Mover para o fim do arquivo
+    tamanhoArquivo = ftell(fptr);               // Obter o tamanho do arquivo
+    rewind(fptr);                               // Voltar ao início do arquivo
+
+    // Alocação dinâmica de memória para armazenar o conteúdo do arquivo
+    conteudo = (char *)malloc(sizeof(char) * (tamanhoArquivo + 1));
+    if (conteudo == NULL) {
+        printf("Erro ao alocar memória.");
+        fclose(fptr);
+        return;
+    }
+
+    fread(conteudo, sizeof(char), tamanhoArquivo, fptr);            // Lê o conteúdo do arquivo para o buffer
+    conteudo[tamanhoArquivo] = '\0';                                // procura o "\0" do final do arquivo
+
+    printf("%s", conteudo);                                     // Imprime o conteúdo do arquivo
+
+    free(conteudo);         // Liberação de memória
+    fclose(fptr);
+}
+
 void menu() {
     printf("\nMENU EDITOR DE ÁRVORE\n");
     printf("1 - Inserir nome e RGM\n");
@@ -229,6 +262,7 @@ void menu() {
 	printf("3 - Pesquisar por RGM\n");
 	printf("4 - Esvaziar a árvore\n");
     printf("5 - Exibir árvore\n");
+    printf("6 - Créditos\n");
 	printf("0 - Fechar programa\n");
 }
 
@@ -334,7 +368,7 @@ int main () {
 						system("pause");
 						system("cls");	
                         break;
-                    case 4:     // // Exibição Gráfica
+                    case 4:     // Exibição Gráfica
                         system("cls");
                         printf(BLUE"Exibição Gráfica:\n\n\n"CRESET);
                         exibirGraficamente(arvore, 60, 1, 25);
@@ -346,6 +380,12 @@ int main () {
                         printf(RED"Opção Inválida! Digite uma opção válida e tente novamente."CRESET);
                         break;
                 }
+                break;
+            case 6:     // Exibição dos créditos
+                system("cls");
+                lerArquivo("../creditos.txt");
+                system("pause");
+                system("cls");
                 break;
             case 0:     // Saída do programa
                 esvaziar(&arvore);
